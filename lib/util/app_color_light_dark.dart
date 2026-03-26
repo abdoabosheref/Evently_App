@@ -11,12 +11,12 @@ abstract class AppColorLight {
   static const Color red = Color(0xFFFF3232);
   static const Color warning = Color(0xFFF2994A);
   static const Color success = Color(0xFF2ECC71);
+  static const Color white = Color(0xFFFFFFFF);
 }
 
 abstract class AppColorDark {
   static const Color mainColor = Color(0xFF457AED);
   static const Color disable = Color(0xFFB9B9B9);
-  static const Color mainText = Color(0xFFFFFFFF);
   static const Color secText = Color(0xFFD6D6D6);
   static const Color backGround = Color(0xFF000F30);
   static const Color inputs = Color(0xFF001440);
@@ -24,4 +24,5 @@ abstract class AppColorDark {
   static const Color red = Color(0xFFFF3232);
   static const Color warning = Color(0xFFF2994A);
   static const Color success = Color(0xFF2ECC71);
+  static const Color white = Color(0xFFFFFFFF);
 }
