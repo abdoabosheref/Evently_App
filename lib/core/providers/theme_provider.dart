@@ -13,4 +13,7 @@ class ThemeProvider extends ChangeNotifier{
       notifyListeners();
     }
   }
+  bool isLight(){
+    return appTheme == ThemeMode.light ;
+  }
 }

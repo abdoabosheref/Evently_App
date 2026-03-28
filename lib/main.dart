@@ -1,6 +1,6 @@
 import 'package:evently_app/core/providers/language_provider.dart';
 import 'package:evently_app/core/providers/theme_provider.dart';
-import 'package:evently_app/ui/home/home_screen.dart';
+import 'package:evently_app/ui/home/profile_tab.dart';
 import 'package:evently_app/ui/on_boarding/on_boarding.dart';
 import 'package:evently_app/util/app_routes.dart';
 import 'package:evently_app/util/app_theme.dart';
@@ -38,12 +38,12 @@ class MyApp extends StatelessWidget {
         Locale('ar'), // Arabic
       ],
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.homeScreenRoute,
+      initialRoute: AppRoutes.profileTabRoute,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: themeProvider.appTheme,
       routes:{
-        AppRoutes.homeScreenRoute :(context)=> HomeScreen(),
+        AppRoutes.profileTabRoute :(context)=> ProfileTab(),
         AppRoutes.onBoardingRoute :(context)=> OnBoarding(),
 
       },
