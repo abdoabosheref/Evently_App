@@ -98,6 +98,12 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
+  /// No description provided for @lightModeText.
+  ///
+  /// In en, this message translates to:
+  /// **'Light mode'**
+  String get lightModeText;
+
   /// No description provided for @skipButton.
   ///
   /// In en, this message translates to:

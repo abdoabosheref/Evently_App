@@ -1,5 +1,6 @@
 {
   "@@locale": "ar",
+  "lightModeText": "الوضع النهارى",
   "skipButton": "تخطي",
   "nextButton": "التالي",
   "letsStartButton": "لنبدأ",
@@ -45,6 +46,7 @@
   "navFavorite": "المفضلة",
   "navProfile": "الملف الشخصي",
   "darkModeText": "الوضع الليلي",
+  "ModeText": "الوضع",
   "logoutText": "تسجيل الخروج",
   "addEventText": "إضافة فعالية",
   "editEventText": "تعديل الفعالية",
