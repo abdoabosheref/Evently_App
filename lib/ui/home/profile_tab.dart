@@ -62,9 +62,7 @@ class _ProfileTabState extends State<ProfileTab> {
                           ? AppColorLight.white
                           : AppColorDark.mainColor,
                     ),
-                    color: themeProvider.isLight()
-                        ? AppColorLight.white
-                        : AppColorDark.inputs,
+                    color: Theme.of(context).colorScheme.primaryContainer,
                   ),
                   child: ListTile(
                     title: Text(
@@ -107,9 +105,7 @@ class _ProfileTabState extends State<ProfileTab> {
                           ? AppColorLight.white
                           : AppColorDark.mainColor,
                     ),
-                    color: themeProvider.isLight()
-                        ? AppColorLight.white
-                        : AppColorDark.inputs,
+                    color: Theme.of(context).colorScheme.primaryContainer
                   ),
                   child: ListTile(
                     title: Text(
@@ -152,11 +148,10 @@ class _ProfileTabState extends State<ProfileTab> {
                           ? AppColorLight.white
                           : AppColorDark.mainColor,
                     ),
-                    color: themeProvider.isLight()
-                        ? AppColorLight.white
-                        : AppColorDark.inputs,
+                    color: Theme.of(context).colorScheme.primaryContainer,
                   ),
                   child: ListTile(
+
                     title: Text(
                       AppLocalizations.of(context)!.logoutText,
                       style: themeProvider.isLight()

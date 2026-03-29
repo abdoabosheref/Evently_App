@@ -3,12 +3,21 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static final ThemeData lightTheme =ThemeData(
-    scaffoldBackgroundColor: AppColorLight.backGround
+    scaffoldBackgroundColor: AppColorLight.backGround,
+    colorScheme: ColorScheme.light(
+    primaryContainer: AppColorLight.white,
+
+  ),
+
+
 
   );
 
   static final ThemeData darkTheme =ThemeData(
-    scaffoldBackgroundColor: AppColorDark.backGround
+    scaffoldBackgroundColor: AppColorDark.backGround,
+    colorScheme: ColorScheme.dark(
+        primaryContainer: AppColorDark.inputs
+    ),
   );
 
 }
