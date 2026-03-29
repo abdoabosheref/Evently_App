@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "ModeText": "Mode",
+  "modeText": "Mode",
   "lightModeText": "Light mode",
   "skipButton": "Skip",
   "nextButton": "Next",
