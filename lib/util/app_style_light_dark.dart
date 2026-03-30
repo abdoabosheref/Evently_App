@@ -35,11 +35,6 @@ abstract class AppStyleLight {
       fontWeight: FontWeight.w600,
       color: AppColorLight.mainColor
   );
-  static final TextStyle smb14White = GoogleFonts.poppins(
-      fontSize: 14,
-      fontWeight: FontWeight.w600,
-      color: AppColorLight.white
-  );
   static final TextStyle smb14SecText = GoogleFonts.poppins(
       fontSize: 14,
       fontWeight: FontWeight.w600,
