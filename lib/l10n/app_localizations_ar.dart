@@ -12,6 +12,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get modeText => 'Mode';
 
   @override
+  String get en => 'ع';
+
+  @override
   String get lightModeText => 'الوضع النهارى';
 
   @override

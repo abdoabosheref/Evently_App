@@ -1,7 +1,4 @@
 import 'package:evently_app/l10n/app_localizations.dart';
-import 'package:evently_app/ui/fav_tab/fav_tab.dart';
-import 'package:evently_app/ui/home_tab/home_tab.dart';
-import 'package:evently_app/ui/profile_tab/profile_tab.dart';
 import 'package:evently_app/util/app_color_light_dark.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,6 +9,7 @@ import 'home_screen_provider/home_screen_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,13 @@ class HomeScreen extends StatelessWidget {
           homeScreenProvider.setIndex(value);
         },
       ),
-    );
+       floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          //Todo : navigate to add event screen
+        },
+         child: const Icon(Icons.add, color: AppColorLight.white),
+
+       ));
   }
 
   BottomNavigationBar builtBNB({required BuildContext context,
