@@ -9,7 +9,13 @@ class AppTheme {
       backgroundColor: AppColorLight.white,
       selectedItemColor: AppColorLight.mainColor,
       unselectedItemColor: AppColorLight.disable,
+
     ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: AppColorLight.mainColor,
+      shape: CircleBorder(),iconSize: 24,
+    ),
+
   );
 
   static final ThemeData darkTheme = ThemeData(
@@ -19,5 +25,10 @@ class AppTheme {
         backgroundColor: AppColorDark.backGround,
         selectedItemColor: AppColorDark.mainColor,
         unselectedItemColor: AppColorDark.disable,
-  ));
+  ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: AppColorDark.mainColor,
+        shape: CircleBorder(),iconSize: 24,
+      )
+  );
 }

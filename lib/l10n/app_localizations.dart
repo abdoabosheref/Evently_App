@@ -104,6 +104,12 @@ abstract class AppLocalizations {
   /// **'Mode'**
   String get modeText;
 
+  /// No description provided for @en.
+  ///
+  /// In en, this message translates to:
+  /// **'EN'**
+  String get en;
+
   /// No description provided for @lightModeText.
   ///
   /// In en, this message translates to:
