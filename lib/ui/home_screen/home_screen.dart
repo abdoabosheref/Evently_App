@@ -17,7 +17,8 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       body: homeScreenProvider.currentTab,
-      bottomNavigationBar: builtBNB(context: context,
+      bottomNavigationBar:
+      builtBNB(context: context,
         index: homeScreenProvider.currentIndex,
         onTape: (value) {
           homeScreenProvider.setIndex(value);

@@ -9,7 +9,6 @@ class AppTheme {
       backgroundColor: AppColorLight.white,
       selectedItemColor: AppColorLight.mainColor,
       unselectedItemColor: AppColorLight.disable,
-
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: AppColorLight.mainColor,

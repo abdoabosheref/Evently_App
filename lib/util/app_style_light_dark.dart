@@ -20,6 +20,11 @@ abstract class AppStyleLight {
     fontWeight: FontWeight.w400,
       color: AppColorLight.mainColor
   );
+  static final TextStyle reg14MainText = GoogleFonts.poppins(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      color: AppColorLight.mainText
+  );
   static final TextStyle reg14SecText = GoogleFonts.poppins(
       fontSize: 14,
       fontWeight: FontWeight.w400,
@@ -149,6 +154,7 @@ abstract class AppStyleDark {
       fontWeight: FontWeight.w400,
       color: AppColorDark.white
   );
+
   static final TextStyle med14White = GoogleFonts.poppins(
       fontSize: 14,
       fontWeight: FontWeight.w500,
