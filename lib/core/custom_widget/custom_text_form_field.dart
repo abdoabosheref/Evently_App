@@ -1,10 +1,7 @@
 import 'package:evently_app/core/providers/theme_provider.dart';
-import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/util/app_color_light_dark.dart';
-import 'package:evently_app/util/app_icon.dart';
 import 'package:evently_app/util/app_style_light_dark.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 
