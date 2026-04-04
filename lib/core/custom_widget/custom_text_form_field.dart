@@ -1,5 +1,6 @@
 import 'package:evently_app/core/providers/theme_provider.dart';
 import 'package:evently_app/util/app_color_light_dark.dart';
+import 'package:evently_app/util/app_size.dart';
 import 'package:evently_app/util/app_style_light_dark.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,11 +26,12 @@ class CustomTextFormField extends StatelessWidget {
       validator: validator,
       onChanged: onChanged,
 
+
       style: themeProvider.isLight()
           ?AppStyleLight.reg14MainText : AppStyleDark.reg14white,
       textAlign: .start,
       cursorColor: themeProvider.isLight()
-          ?AppColorLight.mainColor : AppColorDark.white,
+      ?AppColorLight.mainColor : AppColorDark.white,
       keyboardType:keyboardType ,
       cursorErrorColor: AppColorLight.red,
       cursorHeight: 30,
@@ -38,13 +40,14 @@ class CustomTextFormField extends StatelessWidget {
       InputDecoration(
         filled: true,
         fillColor: themeProvider.isLight()
-            ?AppColorLight.white:AppColorDark.inputs,
+        ?AppColorLight.white : AppColorDark.inputs,
         suffixIcon: rightIcon,
         prefixIcon: leftIcon,
         hintText: hintText,
         hintStyle:themeProvider.isLight()
-            ?AppStyleLight.reg14SecText : AppStyleDark.reg14SecText ,
-        contentPadding: EdgeInsets.symmetric(horizontal: 16,vertical: 13),
+        ?AppStyleLight.reg14SecText : AppStyleDark.reg14SecText ,
+        contentPadding: EdgeInsets.symmetric(
+        horizontal:AppSize.width*0.04,vertical:AppSize.height*0.01),
         disabledBorder: builtOIB(themeProvider),
         enabledBorder: builtOIB(themeProvider),
         focusedBorder:builtOIB(themeProvider),
@@ -60,8 +63,11 @@ class CustomTextFormField extends StatelessWidget {
   }
   OutlineInputBorder builtOIB (ThemeProvider themeProvider){
     return OutlineInputBorder(
-      borderSide: BorderSide(color: themeProvider.isLight()? AppColorLight.stroke:AppColorDark.stroke,),
+      borderSide: BorderSide(color: themeProvider.isLight()
+          ?AppColorLight.stroke
+          :AppColorDark.stroke,),
       borderRadius: BorderRadius.circular(8),
+
     );
   }
 }

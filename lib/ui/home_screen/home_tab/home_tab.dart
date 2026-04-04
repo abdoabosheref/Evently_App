@@ -7,10 +7,10 @@ import 'package:evently_app/util/app_style_light_dark.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import '../../util/app_size.dart';
+import '../../../util/app_size.dart';
 
 class HomeTab extends StatefulWidget {
-  HomeTab({super.key});
+  const HomeTab({super.key});
 
   @override
   State<HomeTab> createState() => _HomeTabState();
@@ -22,7 +22,7 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     //todo : app size width * height =  375 *  812
-    AppSize.size(context);
+
     var themeProvider = Provider.of<ThemeProvider>(context);
     List<String> categoryText = [
       AppLocalizations.of(context)!.categoryAll,
@@ -69,7 +69,7 @@ class _HomeTabState extends State<HomeTab> {
                           });
                         },
                         child: categoryTabs(
-                          ItemBuilderIndex: index,
+                          itemBuilderIndex: index,
                           themeProvider: themeProvider.isLight(),
                           categoryList: categoryText[index],
                           iconsList: categoryIcons[index],
@@ -85,7 +85,8 @@ class _HomeTabState extends State<HomeTab> {
             ),
             Expanded(
               child: ListView.separated(
-                itemBuilder: (context, index) => eventCard(themeProvider: themeProvider),
+                itemBuilder: (context, index) =>
+                    eventCard(themeProvider: themeProvider),
                 separatorBuilder: (context, index) => SizedBox(height: 16),
                 itemCount: 2,
               ),
@@ -97,12 +98,12 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   Widget categoryTabs({
-    required int ItemBuilderIndex,
+    required int itemBuilderIndex,
     required bool themeProvider,
     var iconsList,
     var categoryList,
   }) {
-    return selectedIndex == ItemBuilderIndex
+    return selectedIndex == itemBuilderIndex
         ? Container(
             padding: EdgeInsets.symmetric(
               horizontal: AppSize.width * 0.04,
@@ -165,11 +166,10 @@ class _HomeTabState extends State<HomeTab> {
           );
   }
 
-Widget eventCard ({required var themeProvider}){
+  Widget eventCard({required dynamic themeProvider}) {
     return InkWell(
       onDoubleTap: () {
         //Todo : details page with add & delete button
-
       },
       child: Container(
         width: 343,
@@ -238,9 +238,7 @@ Widget eventCard ({required var themeProvider}){
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
                         mainAxisAlignment: .spaceBetween,
                         children: [
@@ -268,34 +266,49 @@ Widget eventCard ({required var themeProvider}){
         ),
       ),
     );
-}
-Widget welcomeBackBar({required var themeProvider}){
-    return ListTile(contentPadding: const EdgeInsets.all(0),
+  }
+
+  Widget welcomeBackBar({required dynamic themeProvider}) {
+    return ListTile(
+      contentPadding: const EdgeInsets.all(0),
       title: Text(
         AppLocalizations.of(context)!.welcomeBack,
         style: themeProvider.isLight()
             ? AppStyleLight.reg14SecText
             : AppStyleDark.reg14SecText,
       ),
-      subtitle:  Text(
+      subtitle: Text(
         'Abdo Mohamed',
         style: themeProvider.isLight()
             ? AppStyleLight.med20MainText
             : AppStyleDark.med20White,
       ),
-      trailing: Row(mainAxisSize: .min,spacing: AppSize.width*0.01,
+      trailing: Row(
+        mainAxisSize: .min,
+        spacing: AppSize.width * 0.01,
         children: [
           themeProvider.isLight()
-              ?SvgPicture.asset(AppIcon.sunOutline)
+              ? SvgPicture.asset(AppIcon.sunOutline)
               : SvgPicture.asset(AppIcon.moon),
-          Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-            color: themeProvider.isLight()? AppColorLight.mainColor:AppColorDark.mainColor,),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: themeProvider.isLight()
+                  ? AppColorLight.mainColor
+                  : AppColorDark.mainColor,
+            ),
 
-            width:AppSize.width*0.09 ,height:AppSize.height*0.04 ,
-            child: Center(child: Text(AppLocalizations.of(context)!.en,style: AppStyleLight.smb14White,)),)
+            width: AppSize.width * 0.09,
+            height: AppSize.height * 0.04,
+            child: Center(
+              child: Text(
+                AppLocalizations.of(context)!.en,
+                style: AppStyleLight.smb14White,
+              ),
+            ),
+          ),
         ],
       ),
     );
-}
-
+  }
 }

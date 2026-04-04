@@ -3,9 +3,10 @@ import 'package:evently_app/util/app_size.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/custom_widget/custom_text_form_field.dart';
-import '../../core/providers/theme_provider.dart';
-import '../../util/app_color_light_dark.dart';
+import '../../../core/custom_widget/custom_text_form_field.dart';
+import '../../../core/providers/theme_provider.dart';
+import '../../../util/app_color_light_dark.dart';
+
 
 class FavTab extends StatelessWidget {
   const FavTab({super.key});
@@ -34,6 +35,7 @@ class FavTab extends StatelessWidget {
                   //Todo ; search or fav events
                 },
               ),
+
             ],
           ),
         ),

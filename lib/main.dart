@@ -1,12 +1,16 @@
 import 'package:evently_app/core/providers/language_provider.dart';
 import 'package:evently_app/core/providers/theme_provider.dart';
-import 'package:evently_app/ui/fav_tab/fav_tab.dart';
+import 'package:evently_app/ui/authentication_screens/forget_password_screen/forget_Password_screen.dart';
+import 'package:evently_app/ui/authentication_screens/login_screen/login_screen.dart';
+import 'package:evently_app/ui/authentication_screens/sign_up_screen/sign_up_screen.dart';
+import 'package:evently_app/ui/home_screen/fav_tab/fav_tab.dart';
 import 'package:evently_app/ui/home_screen/home_screen.dart';
-import 'package:evently_app/ui/home_screen/home_screen_provider/home_screen_provider.dart';
-import 'package:evently_app/ui/home_tab/home_tab.dart';
-import 'package:evently_app/ui/profile_tab/profile_tab.dart';
+import 'package:evently_app/core/providers/home_screen_provider.dart';
+import 'package:evently_app/ui/home_screen/home_tab/home_tab.dart';
+import 'package:evently_app/ui/home_screen/profile_tab/profile_tab.dart';
 import 'package:evently_app/ui/on_boarding/on_boarding.dart';
 import 'package:evently_app/util/app_routes.dart';
+import 'package:evently_app/util/app_size.dart';
 import 'package:evently_app/util/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -29,6 +33,8 @@ class MyApp extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
+    AppSize.size(context);
+
     var languageProvider = Provider.of<LanguageProvider>(context);
     var themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
@@ -49,13 +55,16 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: themeProvider.appTheme,
 
-      initialRoute: AppRoutes.homeScreenRoute,
+      initialRoute: AppRoutes.loginScreenRoute,
       routes:{
         AppRoutes.profileTabRoute :(context)=> ProfileTab(),
         AppRoutes.onBoardingRoute :(context)=> OnBoarding(),
         AppRoutes.homeTabRoute :(context)=> HomeTab(),
         AppRoutes.homeScreenRoute :(context) =>HomeScreen(),
         AppRoutes.favTabRoute :(context)=> FavTab(),
+        AppRoutes.loginScreenRoute :(context)=> LoginScreen(),
+        AppRoutes.signUpScreenRoute :(context) =>SignUpScreen(),
+        AppRoutes.forgetPasswordScreenRoute :(context)=> ForgetPasswordScreen(),
 
 
       },
