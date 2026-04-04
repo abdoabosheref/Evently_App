@@ -233,7 +233,7 @@ abstract class AppLocalizations {
   /// No description provided for @forgotPassword.
   ///
   /// In en, this message translates to:
-  /// **'Forgot Password?'**
+  /// **'Forgot Password ?'**
   String get forgotPassword;
 
   /// No description provided for @loginButton.
@@ -245,7 +245,7 @@ abstract class AppLocalizations {
   /// No description provided for @dontHaveAccount.
   ///
   /// In en, this message translates to:
-  /// **'Don\'t have an account?'**
+  /// **'Don\'t have an account ?'**
   String get dontHaveAccount;
 
   /// No description provided for @signupLink.
