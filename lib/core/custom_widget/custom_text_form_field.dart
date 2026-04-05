@@ -13,15 +13,17 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? leftIcon;
   final Widget? rightIcon;
   final String hintText;
+  final int ? maxLines ;
 
 
    CustomTextFormField({super.key,required this.hintText, this.validator,
-   required this.onChanged,this.keyboardType,this.leftIcon,this.rightIcon});
+   required this.onChanged,this.keyboardType,this.leftIcon,this.rightIcon,
+   this.maxLines});
 
   @override
   Widget build(BuildContext context) {
     var themeProvider= Provider.of<ThemeProvider>(context);
-    return TextFormField(
+    return TextFormField(maxLines: maxLines,
 
       validator: validator,
       onChanged: onChanged,
@@ -66,7 +68,7 @@ class CustomTextFormField extends StatelessWidget {
       borderSide: BorderSide(color: themeProvider.isLight()
           ?AppColorLight.stroke
           :AppColorDark.stroke,),
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(16),
 
     );
   }

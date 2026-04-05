@@ -7,4 +7,7 @@ abstract class AppRoutes {
  static const String loginScreenRoute = 'login_screen_route';
  static const String signUpScreenRoute = 'signUp_screen_route';
  static const String forgetPasswordScreenRoute = 'forgetPassword_screen_route';
+ static const String addEventScreenRoute = 'addEvent_screen_route';
+ static const String eventDetailsScreenRoute = 'eventDetails_screen_route';
+ static const String editEventScreenRoute = 'editEvents_screen_route';
 }

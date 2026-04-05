@@ -15,7 +15,6 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       body: Padding(
@@ -26,17 +25,23 @@ class SignUpScreen extends StatelessWidget {
             children: [
               Image.asset(AppIcon.evently),
               SizedBox(height: AppSize.height * 0.05),
-              
-              Text(AppLocalizations.of(context)!.createAccountTitle,
+
+              Text(
+                AppLocalizations.of(context)!.createAccountTitle,
                 style: themeProvider.isLight()
                     ? AppStyleLight.smb24MainColor
                     : AppStyleDark.smb24White,
               ),
               SizedBox(height: AppSize.height * 0.02),
-              CustomTextFormField(hintText:AppLocalizations.of(context)!.nameHint,
+              CustomTextFormField(
+                hintText: AppLocalizations.of(context)!.nameHint,
                 leftIcon: Padding(
-                  padding: const EdgeInsets.all( 10),
-                  child: SvgPicture.asset(AppIcon.user,width: 24,fit: .contain,),
+                  padding: const EdgeInsets.all(10),
+                  child: SvgPicture.asset(
+                    AppIcon.user,
+                    width: 24,
+                    fit: .contain,
+                  ),
                 ),
                 onChanged: (text) {
                   //Todo: email validation
@@ -44,13 +49,17 @@ class SignUpScreen extends StatelessWidget {
                 validator: (text) {
                   return null;
                 },
-              
               ),
               SizedBox(height: AppSize.height * 0.01),
-              CustomTextFormField(hintText:AppLocalizations.of(context)!.emailHint,
+              CustomTextFormField(
+                hintText: AppLocalizations.of(context)!.emailHint,
                 leftIcon: Padding(
-                  padding: const EdgeInsets.all( 10),
-                  child: SvgPicture.asset(AppIcon.sms,width: 24,fit: .contain,),
+                  padding: const EdgeInsets.all(10),
+                  child: SvgPicture.asset(
+                    AppIcon.sms,
+                    width: 24,
+                    fit: .contain,
+                  ),
                 ),
                 onChanged: (text) {
                   //Todo: password validation
@@ -58,17 +67,25 @@ class SignUpScreen extends StatelessWidget {
                 validator: (text) {
                   return null;
                 },
-              
               ),
               SizedBox(height: AppSize.height * 0.01),
-              CustomTextFormField(hintText:AppLocalizations.of(context)!.passwordHint,
+              CustomTextFormField(
+                hintText: AppLocalizations.of(context)!.passwordHint,
                 leftIcon: Padding(
-                  padding: const EdgeInsets.all( 10),
-                  child: SvgPicture.asset(AppIcon.lock,width: 24,fit: .contain,),
+                  padding: const EdgeInsets.all(10),
+                  child: SvgPicture.asset(
+                    AppIcon.lock,
+                    width: 24,
+                    fit: .contain,
+                  ),
                 ),
                 rightIcon: Padding(
-                  padding: const EdgeInsets.all( 10),
-                  child: SvgPicture.asset(AppIcon.eye,width: 24,fit: .contain,),
+                  padding: const EdgeInsets.all(10),
+                  child: SvgPicture.asset(
+                    AppIcon.eye,
+                    width: 24,
+                    fit: .contain,
+                  ),
                 ),
                 onChanged: (text) {
                   //Todo: password validation
@@ -76,17 +93,25 @@ class SignUpScreen extends StatelessWidget {
                 validator: (text) {
                   return null;
                 },
-              
               ),
               SizedBox(height: AppSize.height * 0.01),
-              CustomTextFormField(hintText:AppLocalizations.of(context)!.confirmPasswordHint,
+              CustomTextFormField(
+                hintText: AppLocalizations.of(context)!.confirmPasswordHint,
                 leftIcon: Padding(
-                  padding: const EdgeInsets.all( 10),
-                  child: SvgPicture.asset(AppIcon.lock,width: 24,fit: .contain,),
+                  padding: const EdgeInsets.all(10),
+                  child: SvgPicture.asset(
+                    AppIcon.lock,
+                    width: 24,
+                    fit: .contain,
+                  ),
                 ),
                 rightIcon: Padding(
-                  padding: const EdgeInsets.all( 10),
-                  child: SvgPicture.asset(AppIcon.eye,width: 24,fit: .contain,),
+                  padding: const EdgeInsets.all(10),
+                  child: SvgPicture.asset(
+                    AppIcon.eye,
+                    width: 24,
+                    fit: .contain,
+                  ),
                 ),
                 onChanged: (text) {
                   //Todo: password validation
@@ -94,59 +119,62 @@ class SignUpScreen extends StatelessWidget {
                 validator: (text) {
                   return null;
                 },
-              
               ),
               SizedBox(height: AppSize.height * 0.06),
-              CustomElevatedButton(switchButtonStyle: true,
-                  appLocalText:AppLocalizations.of(context)!.signupButton ,
-                  onTap:  () {
-                    //todo: navigate to Home screen
-                  }),
-              SizedBox(height: AppSize.height * 0.05),
-              Row(mainAxisAlignment: .center,spacing:1,
-                children: [
-                  Text(AppLocalizations.of(context)!.alreadyHaveAccount,
-                    style: themeProvider.isLight()? AppStyleLight.smb14SecText:
-                    AppStyleDark.smb14SecText,),
-                  TextButton(onPressed: (){
-                    Navigator.pushNamed(context, AppRoutes.loginScreenRoute);
-                  },
-                      child:  Text(AppLocalizations.of(context)!.loginButton,)
-                  ) ],
+              CustomElevatedButton(
+                switchButtonStyle: true,
+                appLocalText: AppLocalizations.of(context)!.signupButton,
+                onTap: () {
+                  //todo: navigate to Home screen
+                },
               ),
-              SizedBox(height: AppSize.height * 0.03),
-              Row(crossAxisAlignment: .center,
+              SizedBox(height: AppSize.height * 0.05),
+              Row(
+                mainAxisAlignment: .center,
+                spacing: 1,
                 children: [
-                  Expanded(
-                    child: Divider(
-                      endIndent: 16,
-                    ),
+                  Text(
+                    AppLocalizations.of(context)!.alreadyHaveAccount,
+                    style: themeProvider.isLight()
+                        ? AppStyleLight.smb14SecText
+                        : AppStyleDark.smb14SecText,
                   ),
-                  Text(AppLocalizations.of(context)!.or,
-                    style:themeProvider.isLight()
-                        ?AppStyleLight.med16MainColor
-                        :AppStyleDark.med16MainColor,
-                  ),
-                  Expanded(
-                    child: Divider(
-                      indent: 16,
-                    ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRoutes.loginScreenRoute);
+                    },
+                    child: Text(AppLocalizations.of(context)!.loginButton),
                   ),
                 ],
               ),
+              SizedBox(height: AppSize.height * 0.03),
+              Row(
+                crossAxisAlignment: .center,
+                children: [
+                  Expanded(child: Divider(endIndent: 16)),
+                  Text(
+                    AppLocalizations.of(context)!.or,
+                    style: themeProvider.isLight()
+                        ? AppStyleLight.med16MainColor
+                        : AppStyleDark.med16MainColor,
+                  ),
+                  Expanded(child: Divider(indent: 16)),
+                ],
+              ),
               SizedBox(height: AppSize.height * 0.02),
-              CustomElevatedButton( switchButtonStyle: false,
-                  svgLeftIcon: SvgPicture.asset(AppIcon.google,colorFilter: null,
-                    width: AppSize.width*0.03,height:AppSize.height*0.03,),
-                  appLocalText:AppLocalizations.of(context)!.signupWithGoogle ,
-                  onTap:  () {
-                    //todo: navigate to Home screen
-              
-              
-                  }),
-              
-              
-              
+              CustomElevatedButton(
+                switchButtonStyle: false,
+                svgLeftIcon: SvgPicture.asset(
+                  AppIcon.google,
+                  colorFilter: null,
+                  width: AppSize.width * 0.03,
+                  height: AppSize.height * 0.03,
+                ),
+                appLocalText: AppLocalizations.of(context)!.signupWithGoogle,
+                onTap: () {
+                  //todo: navigate to Home screen
+                },
+              ),
             ],
           ),
         ),
