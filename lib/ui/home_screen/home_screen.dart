@@ -1,5 +1,6 @@
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/util/app_color_light_dark.dart';
+import 'package:evently_app/util/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,7 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //Todo : navigate to add event screen
+          Navigator.pushNamed(context, AppRoutes.addEventScreenRoute);
         },
         child: const Icon(Icons.add, color: AppColorLight.white),
       ),

@@ -3,6 +3,9 @@ import 'package:evently_app/core/providers/theme_provider.dart';
 import 'package:evently_app/ui/authentication_screens/forget_password_screen/forget_Password_screen.dart';
 import 'package:evently_app/ui/authentication_screens/login_screen/login_screen.dart';
 import 'package:evently_app/ui/authentication_screens/sign_up_screen/sign_up_screen.dart';
+import 'package:evently_app/ui/event_screens/add_event/add_event.dart';
+import 'package:evently_app/ui/event_screens/edit_event/edit_event.dart';
+import 'package:evently_app/ui/event_screens/event_details/event_details.dart';
 import 'package:evently_app/ui/home_screen/fav_tab/fav_tab.dart';
 import 'package:evently_app/ui/home_screen/home_screen.dart';
 import 'package:evently_app/core/providers/home_screen_provider.dart';
@@ -65,6 +68,12 @@ class MyApp extends StatelessWidget {
         AppRoutes.loginScreenRoute :(context)=> LoginScreen(),
         AppRoutes.signUpScreenRoute :(context) =>SignUpScreen(),
         AppRoutes.forgetPasswordScreenRoute :(context)=> ForgetPasswordScreen(),
+        AppRoutes.editEventScreenRoute :(context)=> EditEvent(),
+        AppRoutes.addEventScreenRoute :(context)=> AddEvent(),
+        AppRoutes.eventDetailsScreenRoute :(context)=> EventDetails(),
+
+
+
 
 
       },

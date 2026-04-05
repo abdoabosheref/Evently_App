@@ -4,7 +4,7 @@ abstract class AppIcon {
   static const String bike = 'assets/icons/bike.svg';
   static const String books = 'assets/icons/book.svg';
   static const String cake = 'assets/icons/cake.svg';
-  static const String calender = 'assets/icons/calender.svg';
+  static const String calender = 'assets/icons/calendar.svg';
   static const String clock = 'assets/icons/clock.svg';
   static const String edit = 'assets/icons/edit.svg';
   static const String eye = 'assets/icons/eye.svg';
