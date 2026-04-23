@@ -1,13 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:evently_app/core/class_model/event_model.dart';
+import 'package:evently_app/core/providers/event_list_provider.dart';
 import 'package:evently_app/core/providers/theme_provider.dart';
+import 'package:evently_app/fire_base_utils.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/util/app_color_light_dark.dart';
 import 'package:evently_app/util/app_icon.dart';
-import 'package:evently_app/util/app_image.dart';
 import 'package:evently_app/util/app_style_light_dark.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../../../core/custom_widget/custom_category_tab.dart';
+import '../../../core/class_model/lists.dart';
+import '../../../core/custom_widget/custom_snack_bar.dart';
+import '../../../core/providers/user_provider.dart';
+import '../../../util/app_routes.dart';
 import '../../../util/app_size.dart';
 
 class HomeTab extends StatefulWidget {
@@ -18,14 +25,24 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
+  late EventListProvider eventListProvider;
+  late UserProvider userProvider;
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      eventListProvider.addAllEventsFromFireStore(userProvider.currentUser!.id);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    //todo : app size width * height =  375 *  812
-
+    var userProvider = Provider.of<UserProvider>(context);
+    eventListProvider = Provider.of<EventListProvider>(context);
+    userProvider = Provider.of<UserProvider>(context);
     var themeProvider = Provider.of<ThemeProvider>(context);
-
+    eventListProvider.categoryText(context);
 
     return Scaffold(
       body: Padding(
@@ -37,16 +54,57 @@ class _HomeTabState extends State<HomeTab> {
         child: Column(
           children: [
             SizedBox(height: AppSize.height * 0.02),
-            welcomeBackBar(themeProvider: themeProvider),
+            welcomeBackBar(
+              themeProvider: themeProvider,
+              userProvider: userProvider.currentUser?.name ?? 'guest',
+            ),
             SizedBox(height: AppSize.height * 0.02),
-            CustomCategoryTab(),
+            Row(
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: AppSize.height * 0.04,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) => InkWell(
+                        onTap: () {
+                            eventListProvider.changeSelectedIndex(index,userProvider.currentUser!.id);
+                        },
+                        child: categoryTabs(
+                          itemBuilderIndex: index,
+                          themeProvider: themeProvider.isLight(),
+                          categoryList: eventListProvider.categoryText(
+                            context,
+                          )[index],
+                          iconsList: ListData.categoryIcons[index],
+                        ),
+                      ),
+                      separatorBuilder: (context, index) =>
+                          SizedBox(height: 10, width: 10),
+                      itemCount: eventListProvider.categoryText(context).length,
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Expanded(
-              child: ListView.separated(
-                itemBuilder: (context, index) =>
-                    eventCard(themeProvider: themeProvider),
-                separatorBuilder: (context, index) => SizedBox(height: 16),
-                itemCount: 2,
-              ),
+              child: eventListProvider.filterEventsList.isEmpty
+                  ? Center(
+                      child: Text(
+                        'no events found',
+                        style: AppStyleLight.smb24MainColor,
+                      ),
+                    )
+                  : ListView.separated(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      itemBuilder: (context, index) => eventCard(userProvider: userProvider,
+                        themeProvider: themeProvider,
+                        event: eventListProvider.filterEventsList[index],
+                      ),
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 16),
+                      itemCount: eventListProvider.filterEventsList.length,
+                    ),
             ),
           ],
         ),
@@ -54,25 +112,90 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
+  Widget categoryTabs({
+    required int itemBuilderIndex,
+    required bool themeProvider,
+    var iconsList,
+    var categoryList,
+  }) {
+    return eventListProvider.selectedIndex == itemBuilderIndex
+        ? Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSize.width * 0.04,
+              vertical: AppSize.height * 0.001,
+            ),
+            decoration: BoxDecoration(
+              color: themeProvider
+                  ? AppColorLight.mainColor
+                  : AppColorDark.mainColor,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            height: AppSize.height * 0.04,
+            child: Row(
+              spacing: AppSize.width * 0.02,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  iconsList,
+                  colorFilter: themeProvider
+                      ? ColorFilter.mode(AppColorLight.white, .srcIn)
+                      : ColorFilter.mode(AppColorDark.white, .srcIn),
+                ),
+                Text(
+                  categoryList,
+                  style: themeProvider
+                      ? AppStyleLight.med16White
+                      : AppStyleDark.med16White,
+                ),
+              ],
+            ),
+          )
+        : Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSize.width * 0.04,
+              vertical: AppSize.height * 0.001,
+            ),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primaryContainer,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            height: AppSize.height * 0.04,
+            child: Row(
+              spacing: AppSize.width * 0.02,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  iconsList,
+                  colorFilter: themeProvider
+                      ? ColorFilter.mode(AppColorLight.mainColor, .srcIn)
+                      : ColorFilter.mode(AppColorDark.mainColor, .srcIn),
+                ),
+                Text(
+                  categoryList,
+                  style: themeProvider
+                      ? AppStyleLight.med16MainText
+                      : AppStyleDark.med16White,
+                ),
+              ],
+            ),
+          );
+  }
 
-
-  Widget eventCard({required dynamic themeProvider}) {
+  Widget eventCard({
+    required dynamic themeProvider,
+    required EventModel event,required UserProvider userProvider
+  }) {
     return InkWell(
       onDoubleTap: () {
-        //Todo : details page with add & delete button
+
+        Navigator.pushNamed(context, AppRoutes.eventDetailsScreenRoute,
+        arguments: event);
       },
       child: Container(
         width: 343,
         height: 193,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              themeProvider.isLight()
-                  ? AppImage.exhibitionLight
-                  : AppImage.exhibitionDark,
-            ),
-            fit: .cover,
-          ),
+          image: DecorationImage(image: AssetImage(event.image), fit: .cover),
           border: BoxBorder.all(
             width: 2,
             color: themeProvider.isLight()
@@ -107,7 +230,7 @@ class _HomeTabState extends State<HomeTab> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      '21 JAN',
+                      DateFormat('d MMM').format(event.eventDate),
                       style: themeProvider.isLight()
                           ? AppStyleLight.smb16MainColor
                           : AppStyleDark.smb16MainColor,
@@ -133,7 +256,7 @@ class _HomeTabState extends State<HomeTab> {
                         mainAxisAlignment: .spaceBetween,
                         children: [
                           Text(
-                            '21 JAN',
+                            event.title,
                             textAlign: .center,
                             style: themeProvider.isLight()
                                 ? AppStyleLight.smb16MainColor
@@ -141,9 +264,27 @@ class _HomeTabState extends State<HomeTab> {
                           ),
                           InkWell(
                             onTap: () {
-                              //Todo : add to favTab + change icon color
+                              eventListProvider.updateIsFavourite(event,userProvider.currentUser!.id);
+                              CustomSnackBar.snackBarAlert(
+                                context,
+                                'Event Updated',
+                              );
                             },
-                            child: SvgPicture.asset(AppIcon.heart),
+                            child: event.isFavourite
+                                ? SvgPicture.asset(
+                                    AppIcon.heart,
+                                    colorFilter: ColorFilter.mode(
+                                      AppColorLight.mainColor,
+                                      .srcIn,
+                                    ),
+                                  )
+                                : SvgPicture.asset(
+                                    AppIcon.heart,
+                                    colorFilter: ColorFilter.mode(
+                                      AppColorLight.disable,
+                                      .srcIn,
+                                    ),
+                                  ),
                           ),
                         ],
                       ),
@@ -158,7 +299,10 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
-  Widget welcomeBackBar({required dynamic themeProvider}) {
+  Widget welcomeBackBar({
+    required dynamic themeProvider,
+    required dynamic userProvider,
+  }) {
     return ListTile(
       contentPadding: const EdgeInsets.all(0),
       title: Text(
@@ -168,7 +312,7 @@ class _HomeTabState extends State<HomeTab> {
             : AppStyleDark.reg14SecText,
       ),
       subtitle: Text(
-        'Abdo Mohamed',
+        userProvider,
         style: themeProvider.isLight()
             ? AppStyleLight.med20MainText
             : AppStyleDark.med20White,

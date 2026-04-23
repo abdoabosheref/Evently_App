@@ -14,7 +14,7 @@ abstract class AppImage {
 
   static const String birthdayLight = 'assets/images/birthday_light.png';
   static const String sportLight = 'assets/images/sport_light.png';
-  static const String bookClubLight = 'assets/images/book_light.png.png';
+  static const String bookClubLight = 'assets/images/book_light.png';
   static const String meetingLight = 'assets/images/meeting_light.png';
   static const String exhibitionLight = 'assets/images/exhibition_light.png';
 
