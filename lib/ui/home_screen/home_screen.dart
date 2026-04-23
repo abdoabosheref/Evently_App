@@ -1,14 +1,12 @@
 import 'package:evently_app/l10n/app_localizations.dart';
-import 'package:evently_app/ui/fav_tab/fav_tab.dart';
-import 'package:evently_app/ui/home_tab/home_tab.dart';
-import 'package:evently_app/ui/profile_tab/profile_tab.dart';
 import 'package:evently_app/util/app_color_light_dark.dart';
+import 'package:evently_app/util/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../util/app_icon.dart';
-import 'home_screen_provider/home_screen_provider.dart';
+import '../../core/providers/home_screen_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -19,16 +17,25 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       body: homeScreenProvider.currentTab,
-      bottomNavigationBar: builtBNB(context: context,
+      bottomNavigationBar: builtBNB(
+        context: context,
         index: homeScreenProvider.currentIndex,
         onTape: (value) {
           homeScreenProvider.setIndex(value);
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          //Todo : navigate to add event screen
+          Navigator.pushNamed(context, AppRoutes.addEventScreenRoute);
+        },
+        child: const Icon(Icons.add, color: AppColorLight.white),
+      ),
     );
   }
 
-  BottomNavigationBar builtBNB({required BuildContext context,
+  BottomNavigationBar builtBNB({
+    required BuildContext context,
     required void Function(int)? onTape,
     required int index,
   }) {
@@ -36,28 +43,45 @@ class HomeScreen extends StatelessWidget {
       onTap: onTape,
       currentIndex: index,
       iconSize: 24,
-      selectedIconTheme: IconThemeData(color: AppColorLight.mainColor),
       items: [
         builtBNBItem(
           isSelected: index == 0,
-          selected: ColorFilter.mode(AppColorLight.mainColor, .srcIn),
-          unSelected: ColorFilter.mode(AppColorLight.disable, .srcIn),
+          selected: ColorFilter.mode(
+            Theme.of(context).bottomNavigationBarTheme.selectedItemColor!,
+            .srcIn,
+          ),
+          unSelected: ColorFilter.mode(
+            Theme.of(context).bottomNavigationBarTheme.unselectedItemColor!,
+            .srcIn,
+          ),
           icon: AppIcon.home,
           label: AppLocalizations.of(context)!.navHome,
         ),
 
         builtBNBItem(
           isSelected: index == 1,
-          selected: ColorFilter.mode(AppColorLight.mainColor, .srcIn),
-          unSelected: ColorFilter.mode(AppColorLight.disable, .srcIn),
+          selected: ColorFilter.mode(
+            Theme.of(context).bottomNavigationBarTheme.selectedItemColor!,
+            .srcIn,
+          ),
+          unSelected: ColorFilter.mode(
+            Theme.of(context).bottomNavigationBarTheme.unselectedItemColor!,
+            .srcIn,
+          ),
           icon: AppIcon.heart,
           label: AppLocalizations.of(context)!.navFavorite,
         ),
 
         builtBNBItem(
           isSelected: index == 2,
-          selected: ColorFilter.mode(AppColorLight.mainColor, .srcIn),
-          unSelected: ColorFilter.mode(AppColorLight.disable, .srcIn),
+          selected: ColorFilter.mode(
+            Theme.of(context).bottomNavigationBarTheme.selectedItemColor!,
+            .srcIn,
+          ),
+          unSelected: ColorFilter.mode(
+            Theme.of(context).bottomNavigationBarTheme.unselectedItemColor!,
+            .srcIn,
+          ),
           icon: AppIcon.user,
           label: AppLocalizations.of(context)!.navProfile,
         ),
