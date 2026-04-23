@@ -12,7 +12,7 @@ class CustomAppBar extends StatelessWidget {
   VoidCallback onTap ;
   VoidCallback? onTapEdit ;
   VoidCallback? onTapDelete ;
-  String appLocalText ;
+  Widget appLocalText ;
   bool showModifiedActionButtons ;
    CustomAppBar({super.key,required this.onTap,required this.appLocalText,
      this.onTapDelete,this.onTapEdit,required this.showModifiedActionButtons
@@ -38,7 +38,7 @@ class CustomAppBar extends StatelessWidget {
           ),
         ),
       ),
-      title: Text(appLocalText),
+      title: appLocalText,
       actions: [
 
         Visibility(visible: showModifiedActionButtons  ,

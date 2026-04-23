@@ -8,27 +8,30 @@ import 'package:provider/provider.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
-  final void Function(String) onChanged;
+  final void Function(String)? onChanged;
   final TextInputType? keyboardType;
   final Widget? leftIcon;
   final Widget? rightIcon;
   final String hintText;
   final int ? maxLines ;
+  TextEditingController? controller;
+  bool  obscureText  ;
+  bool readOnly ;
 
 
    CustomTextFormField({super.key,required this.hintText, this.validator,
-   required this.onChanged,this.keyboardType,this.leftIcon,this.rightIcon,
-   this.maxLines});
+    this.onChanged,this.keyboardType,this.leftIcon,this.rightIcon,
+   this.maxLines ,this.controller ,this.obscureText = false ,this.readOnly =false });
 
   @override
   Widget build(BuildContext context) {
     var themeProvider= Provider.of<ThemeProvider>(context);
-    return TextFormField(maxLines: maxLines,
+    return TextFormField(
+      maxLines: obscureText ? 1 : (maxLines ?? 1),
 
       validator: validator,
       onChanged: onChanged,
-
-
+      controller: controller,
       style: themeProvider.isLight()
           ?AppStyleLight.reg14MainText : AppStyleDark.reg14white,
       textAlign: .start,
@@ -38,12 +41,17 @@ class CustomTextFormField extends StatelessWidget {
       cursorErrorColor: AppColorLight.red,
       cursorHeight: 30,
       cursorWidth: 2,
+      obscureText: obscureText,
+      obscuringCharacter: '*',
+      readOnly: readOnly,
+
       decoration:
       InputDecoration(
         filled: true,
         fillColor: themeProvider.isLight()
         ?AppColorLight.white : AppColorDark.inputs,
         suffixIcon: rightIcon,
+        suffixIconConstraints:BoxConstraints() ,
         prefixIcon: leftIcon,
         hintText: hintText,
         hintStyle:themeProvider.isLight()

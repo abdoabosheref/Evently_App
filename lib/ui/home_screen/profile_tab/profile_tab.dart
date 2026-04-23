@@ -1,11 +1,15 @@
+import 'package:evently_app/core/custom_widget/custom_snack_bar.dart';
 import 'package:evently_app/core/providers/language_provider.dart';
 import 'package:evently_app/core/providers/theme_provider.dart';
 import 'package:evently_app/util/app_color_light_dark.dart';
 import 'package:evently_app/util/app_icon.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import '../../../core/providers/user_provider.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../util/app_routes.dart';
 import '../../../util/app_size.dart';
 import '../../../util/app_style_light_dark.dart';
 
@@ -21,6 +25,7 @@ class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
     AppSize.size(context);
+    var userProvider =Provider.of<UserProvider>(context);
     var languageProvider = Provider.of<LanguageProvider>(context);
     var themeProvider = Provider.of<ThemeProvider>(context);
     String? dropLanguageValue = languageProvider.appLanguage;
@@ -38,13 +43,13 @@ class _ProfileTabState extends State<ProfileTab> {
               Column(spacing:AppSize.height*0.004,
                 children: [
                 Text(
-                  'Abdo Mohamed',
+                  userProvider.currentUser?.name??'user name',
                   style: themeProvider.isLight()
                       ? AppStyleLight.smb20MainText
                       : AppStyleDark.smb20White,
                 ),
                 Text(
-                  'abdoabosheref@gmail.com',
+                  userProvider.currentUser?.email??'email',
                   style: themeProvider.isLight()
                       ? AppStyleLight.reg14SecText
                       : AppStyleDark.reg14SecText,
@@ -158,7 +163,21 @@ class _ProfileTabState extends State<ProfileTab> {
                           ? AppStyleLight.med16MainText
                           : AppStyleDark.med16White,
                     ),
-                    trailing: IconButton(onPressed: (){}, icon: SvgPicture.asset(AppIcon.logout,width: 24,)),
+                    trailing: IconButton(onPressed: () async {
+                      try {
+                        await FirebaseAuth.instance.signOut();
+                        if (context.mounted) {
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            AppRoutes.loginScreenRoute,
+                                (route) => false,
+                          );
+                        }
+                      } catch (e) {
+                        CustomSnackBar.snackBarAlert(context, "Error logging out: $e");
+
+                      }
+                    }, icon: SvgPicture.asset(AppIcon.logout,width: 24,)),
                   ),
                 ),
               ],)

@@ -4,11 +4,11 @@ import 'package:provider/provider.dart';
 import '../../util/app_size.dart';
 
 class CustomEventsImageBox extends StatelessWidget {
-  String imagePathInLight ;
-  String imagePathInDark ;
+  var  image ;
 
-   CustomEventsImageBox({super.key,required this.imagePathInDark,
-  required this.imagePathInLight});
+
+   CustomEventsImageBox({super.key, this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,7 @@ class CustomEventsImageBox extends StatelessWidget {
     return Container(height: AppSize.height*0.23,
       decoration: BoxDecoration(
           image:DecorationImage(
-              image: AssetImage(themeProvider.isLight()
-                  ? imagePathInLight :imagePathInDark
-              )) ,
+              image: AssetImage(image) ,),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: Theme.of(context).colorScheme.primaryFixed),
           color: Theme.of(context).colorScheme.primaryContainer),);
