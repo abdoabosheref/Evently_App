@@ -27,17 +27,12 @@ import 'firebase_options.dart';
 import 'l10n/app_localizations.dart';
 
 void main() async {
-  // 1. تهيئة الأدوات
   WidgetsFlutterBinding.ensureInitialized();
-
-  // 2. تهيئة Firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-
   final prefs = await SharedPreferences.getInstance();
-
 
   final languageProvider = LanguageProvider();
   final themeProvider = ThemeProvider();
