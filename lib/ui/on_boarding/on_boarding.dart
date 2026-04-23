@@ -59,7 +59,8 @@ class OnboardingScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   pro.currentIndex > 0
-                      ? SizedBox(height: 32,width: 32,
+                  //Todo : 375  *  812
+                      ? SizedBox(height: AppSize.height * 0.03,width: AppSize.width * 0.08,
                         child: IconButton(
                     style: IconButton.styleFrom(
                       backgroundColor: themeProvider.isLight()?AppColorLight.white:AppColorDark.inputs,
@@ -69,21 +70,22 @@ class OnboardingScreen extends StatelessWidget {
                      icon: Icon( size: 20,
                       Icons.arrow_back_ios,color: themeProvider.isLight()?AppColorLight.mainColor:AppColorDark.white,)),
                       )
-                      : const SizedBox(width: 40),
-                  Image.asset(AppIcon.evently, height: 40,color: themeProvider.isLight()? AppColorLight.mainColor:AppColorDark.mainColor,),
+                      : SizedBox(width: AppSize.width * 0.10),
+                  Image.asset(AppIcon.evently, height: AppSize.height * 0.04,color: themeProvider.isLight()? AppColorLight.mainColor:AppColorDark.mainColor,),
                   pro.currentIndex < onboardingData.length - 1
-                      ? SizedBox(height: 32,width: 63,
+                      ? SizedBox(height:AppSize.height * 0.03,width: AppSize.width * 0.16,
                         child: IconButton(
                         style: IconButton.styleFrom(
                         backgroundColor: themeProvider.isLight()?AppColorLight.white:AppColorDark.inputs,
                         side: BorderSide(
                         color: Theme.of(context).colorScheme.primaryFixed)),
-                        onPressed: (){
+                        onPressed: () async {
+                          await pro.completeOnboarding();
                           Navigator.pushReplacementNamed(context, AppRoutes.signUpScreenRoute);
                         },
                         icon: Text(AppLocalizations.of(context)!.skipButton,style: themeProvider.isLight()? AppStyleLight.smb14MainColor:AppStyleDark.smb14White,)),
                       )
-                      : const SizedBox(width: 40),
+                      :  SizedBox(width: AppSize.width * 0.10),
                 ],
               ),
             ),
@@ -96,13 +98,15 @@ class OnboardingScreen extends StatelessWidget {
                 itemCount: onboardingData.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    padding:  EdgeInsets.symmetric(horizontal: AppSize.width * 0.06),
                     child: Column(crossAxisAlignment: .start,
                       children: [
                         const Spacer(),
-                        SvgPicture.asset(onboardingData[index]['image']!,
-                          colorFilter: ColorFilter.mode(themeProvider.isLight()? Color(0xFF1A237E) : Colors.white,
-                              .srcIn),),
+                        Center(
+                          child: SvgPicture.asset(onboardingData[index]['image']!,
+                            colorFilter: ColorFilter.mode(themeProvider.isLight()? Color(0xFF1A237E) : Colors.white,
+                                .srcIn),),
+                        ),
                         const Spacer(),
                         Text(
                           onboardingData[index]['title']!,
@@ -115,16 +119,16 @@ class OnboardingScreen extends StatelessWidget {
                           textAlign: TextAlign.start,
                           style:themeProvider.isLight()? AppStyleLight.reg16SecText :AppStyleDark.reg16SecText,
                         ),
-                        const SizedBox(height: 20),
+                         SizedBox(height: AppSize.height * 0.02),
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(
                             onboardingData.length,
                                 (i) => Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 4),
+                              margin:  EdgeInsets.symmetric(horizontal: AppSize.width * 0.01),
                               width: pro.currentIndex == i ? 25 : 10,
-                              height: 8,
+                              height: AppSize.height * 0.009,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: pro.currentIndex == i ? AppColorLight.mainColor : AppColorDark.mainColor,
@@ -162,7 +166,7 @@ class OnboardingScreen extends StatelessWidget {
                               )
                             ],
                           ),
-                          const SizedBox(height: 10),
+                           SizedBox(height: AppSize.height *0.01 ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -204,7 +208,7 @@ class OnboardingScreen extends StatelessWidget {
               padding: const EdgeInsets.all(24),
               child: SizedBox(
                 width: double.infinity,
-                height: 55,
+                height: AppSize.height*0.06,
                 child: CustomElevatedButton(appLocalText:pro.currentIndex == 0
                     ? AppLocalizations.of(context)!.letsStartButton
                     : (pro.currentIndex == onboardingData.length - 1 ? AppLocalizations.of(context)!.getStartedButton : AppLocalizations.of(context)!.nextButton),
