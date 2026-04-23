@@ -13,12 +13,10 @@ import 'package:evently_app/util/app_routes.dart';
 import 'package:evently_app/util/app_size.dart';
 import 'package:evently_app/util/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'core/providers/event_list_provider.dart';
 import 'core/providers/home_screen_provider.dart';
 import 'core/providers/language_provider.dart';
@@ -37,30 +35,26 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // 3. الحصول على نسخة من SharedPreferences
+
   final prefs = await SharedPreferences.getInstance();
 
-  // 4. قراءة القيم (أو استخدام الـ load داخل الـ Providers كما فعلت)
+
   final languageProvider = LanguageProvider();
   final themeProvider = ThemeProvider();
   final onboardingProvider = OnboardingProvider();
 
-  // تحميل البيانات المحفوظة فعلياً
   await languageProvider.loadLanguage();
   await themeProvider.loadTheme();
 
-  // فحص هل هي المرة الأولى أم لا
   final bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
 
   runApp(
     MultiProvider(
       providers: [
-        // استخدم .value للأشياء التي أنشأتها وحملت بياناتها بالفعل
         ChangeNotifierProvider.value(value: languageProvider),
         ChangeNotifierProvider.value(value: themeProvider),
         ChangeNotifierProvider.value(value: onboardingProvider),
 
-        // الباقي يمكن إنشاؤه كالمعتاد
         ChangeNotifierProvider(create: (context) => HomeScreenProvider()),
         ChangeNotifierProvider(create: (context) => EventListProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
@@ -99,7 +93,6 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: themeProvider.appTheme,
 
-      // هنا نستخدم القيمة التي فحصناها في الـ main
       initialRoute: isFirstTime ? AppRoutes.onBoardingScreenRoute : AppRoutes.loginScreenRoute,
 
       routes: {
